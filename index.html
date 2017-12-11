@@ -1,0 +1,91 @@
+<!doctype <html>
+    <html lang="en">
+        <head>
+          <meta charset="UTF-8">
+          <title>psychic game</title>
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+          <script src="https://code.jquery.com/jquery.js"></script>
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+        </head>
+
+    <body>
+    <header>
+        <h1>Psychic Game</h1>
+    </header>
+
+    <div class="guess the letter">
+        <h3> guess what letter I'm thinking of </h3>
+
+            <h5>
+              <p id="wins"> wins :</p>
+            </h4>
+            <h4>
+              <p id="losses"> losses :</p>
+            </h4>
+            <h4>
+              <p id="guesses">Guesses left :</p>
+            </h4>
+            <h4>
+            <p id="GuessesSoFar"> letters you guessed so far :</p>
+            </h4>
+          </div>
+
+
+    <script type="text/javascript">
+
+    var alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l',
+    'm','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+    var wins = 0;
+    var losses = 0;
+    var guesses = 9 ;
+    var GuessesSoFar = [];
+    var userGuess = null;
+
+    var letterToBeGuessed = alphabet[Math.floor(Math.random() * alphabet.length)];
+
+    console.log(letterToBeGuessed);
+
+    document.onkeypress = function(event) {
+
+    var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
+
+    if (GuessesSoFar.indexOf(userGuess) < 0 , alphabet.indexOf(userGuess) >= 0) {
+		GuessesSoFar[GuessesSoFar.length]=userGuess;
+		guesses--;
+	}
+
+    if (letterToBeGuessed == userGuess) {
+		wins++;
+		console.log("You won!");
+		guesses = 9;
+		GuessesSoFar = [];
+		letterToBeGuessed = alphabet[Math.floor(Math.random() * alphabet.length)];
+        
+    document.getElementById('wins').innerHTML = "Wins: " + wins;
+	}
+    if (guesses == 0) {
+		losses++;
+		console.log("You lost!");
+		guesses = 9;
+		GuessesSoFar = [];
+		letterToBeGuessed = alphabet[Math.floor(Math.random() * alphabet.length)];
+
+        document.getElementById('losses').innerHTML = "losses: " + losses;
+
+    }
+
+    console.log(GuessesSoFar);
+    console.log(letterToBeGuessed);
+
+    document.getElementById('guesses').innerHTML = "Guesses left: " + guesses;
+
+    document.getElementById('GuessesSoFar').innerHTML = "letters you guessed so far :" +  GuessesSoFar;
+    }
+
+    </script>
+
+        
+    </body>
+
+
+</html>
